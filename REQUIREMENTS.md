@@ -10,31 +10,27 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 - Index: [GET] '/products/index',  [no token required] 
 
-
-
 - Show [GET] '/products/show/:productId', [no token required]
-
 
 - Create [POST] '/products/create', [token required] => token  + body json shape: {name: value, price: value, category}
 
-
 - [OPTIONAL] Top 5 most popular products  
-
 
 -[OPTIONAL] get products by category [GET] 'products/categories/:category', [no token required] 
 
 
-#### Users (done)
+
+
+
+#### Users 
 
 - Index: [GET] '/users/index',  [token required]  
 
-
 - Show [GET] '/users/show/:userId', [token required] => note: userId should be the same used to create the token to make sure you are the owner or error will be returned
-
 
 - Create [POST] '/users/create', [no token required] => body json shape: {firstname: value, lastname: value, password: value}
 
--[EXTRA] delete []
+-[EXTRA] delete user [delete]
 
 #### Orders
 
