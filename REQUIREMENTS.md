@@ -52,7 +52,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 ## database schema
 #### users:
-- CREATE TABLE users (
+- users (
     id SERIAL PRIMARY KEY,
     firstname VARCHAR(100) NOT NULL,
     lastname VARCHAR(100) NOT NULL,
@@ -60,7 +60,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 );
 
 #### products:
-- CREATE TABLE products (
+- products (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     price INT NOT NULL,
@@ -68,7 +68,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 );
 
 #### orders:
-- CREATE TABLE orders (
+- orders (
     id SERIAL PRIMARY KEY,
     status VARCHAR(20) NOT NULL DEFAULT 'active',
     userId INT NOT NULL,
@@ -77,7 +77,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 
 #### orders_products:
-- CREATE TABLE orders_products (
+- orders_products (
     id SERIAL UNIQUE,
     orderId INT NOT NULL,
     productId INT NOT NULL,
