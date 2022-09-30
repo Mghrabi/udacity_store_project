@@ -13,44 +13,53 @@ describe("Suite for products endpoints:", () => {
     const newProduct = {
         name: "ball",
         price: 100,
-        category: 'play'
+        category: "play",
     };
     it("create product: POST products/create", async () => {
         const token = (0, authentication_1.createToken)(1);
-        const response = await (0, supertest_1.default)(server_1.default).post("/products/create").set('authorization', `Bearer ${token}`).send(newProduct);
+        const response = await (0, supertest_1.default)(server_1.default)
+            .post("/products/create")
+            .set("authorization", `Bearer ${token}`)
+            .send(newProduct);
         expect(response.status).toEqual(200);
         expect(response.body.id).toBeDefined();
     });
     it("create product: POST products/create", async () => {
         const token = (0, authentication_1.createToken)(1);
-        const response = await (0, supertest_1.default)(server_1.default).post("/products/create").set('authorization', `Bearer ${token}`).send(newProduct);
+        const response = await (0, supertest_1.default)(server_1.default)
+            .post("/products/create")
+            .set("authorization", `Bearer ${token}`)
+            .send(newProduct);
         expect(response.status).toEqual(200);
         expect(response.body.id).toBeDefined();
     });
     it("All products: GET /products/index", async () => {
-        //to make this test independent from the above test 
-        const response = await (0, supertest_1.default)(server_1.default)
-            .get("/products/index");
+        //to make this test independent from the above test
+        const response = await (0, supertest_1.default)(server_1.default).get("/products/index");
         // console.log(response.body)
         expect(response.status).toEqual(200);
         expect(response.body).toBeDefined();
     });
     it("Get one product: GET /products/show/:productId", async () => {
-        //we need a token to create the product, then we could test show product with the id created 
+        //we need a token to create the product, then we could test show product with the id created
         const token = (0, authentication_1.createToken)(1);
-        const response1 = await (0, supertest_1.default)(server_1.default).post("/products/create").set('authorization', `Bearer ${token}`).send(newProduct);
-        const response = await (0, supertest_1.default)(server_1.default)
-            .get(`/products/show/${response1.body.id}`);
+        const response1 = await (0, supertest_1.default)(server_1.default)
+            .post("/products/create")
+            .set("authorization", `Bearer ${token}`)
+            .send(newProduct);
+        const response = await (0, supertest_1.default)(server_1.default).get(`/products/show/${response1.body.id}`);
         // console.log(response.body)
         expect(response.status).toEqual(200);
         expect(response.body.id).toEqual(response1.body.id);
     });
     it("Get one product by category: GET /products/categories/:category", async () => {
-        //we need a token to create the product, then we could test show product with the id created 
+        //we need a token to create the product, then we could test show product with the id created
         const token = (0, authentication_1.createToken)(1);
-        const response1 = await (0, supertest_1.default)(server_1.default).post("/products/create").set('authorization', `Bearer ${token}`).send(newProduct);
-        const response = await (0, supertest_1.default)(server_1.default)
-            .get(`/products/categories/${response1.body.category}`);
+        const response1 = await (0, supertest_1.default)(server_1.default)
+            .post("/products/create")
+            .set("authorization", `Bearer ${token}`)
+            .send(newProduct);
+        const response = await (0, supertest_1.default)(server_1.default).get(`/products/categories/${response1.body.category}`);
         // console.log(response.body)
         expect(response.status).toEqual(200);
         expect(response.body).toBeDefined();
@@ -65,5 +74,5 @@ describe("Suite for products endpoints:", () => {
     //     // console.log(response.body)
     //     expect(response.status).toEqual(200);
     //     expect(response.body).toBeDefined();
-    //   }); 
+    //   });
 });

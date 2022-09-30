@@ -7,8 +7,8 @@
     "start": "node src/server.ts",
     "watch": "tsc-watch --esModuleInterop src/server.ts --outDir ./dist --onSuccess \"node ./dist/server.js\"",
     "test": "set ENV=TEST&& db-migrate up -c 10 -e test && tsc && jasmine && db-migrate db:drop udacity_store_test",
-    "create_DB_test": "db-migrate db:create udacity_store_test",
-    "create_DB": "db-migrate db:create udacity_store",
+    "create_DB_test": "npx db-migrate db:create udacity_store_test",
+    "create_DB": "npx db-migrate db:create udacity_store",
     "tsc": "tsc",
     "me": "npm run create_DB_test && npm run test",
     "migrations": "db-migrate up -c 10 -e dev"

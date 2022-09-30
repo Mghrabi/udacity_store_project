@@ -14,9 +14,9 @@ describe("Suite for user model:", () => {
         //index method
         const indexResult = await new userModel_1.UserModel().index();
         //show method
-        const showResult = await new userModel_1.UserModel().show((createResult.id).toString());
+        const showResult = await new userModel_1.UserModel().show(createResult.id.toString());
         expect(createResult).toEqual(jasmine.objectContaining({ firstname, lastname }));
         expect(indexResult[0]).toEqual(jasmine.objectContaining({ firstname, lastname }));
-        expect((showResult)).toEqual(jasmine.objectContaining({ firstname, lastname }));
+        expect(showResult).toEqual(jasmine.objectContaining({ firstname, lastname }));
     });
 });

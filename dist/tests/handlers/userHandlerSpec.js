@@ -21,7 +21,7 @@ describe("Suite for users endpoints:", () => {
         expect(response.body.id).toBeDefined();
     });
     it("User login: POST users/login", async () => {
-        //to make this test independent from the above test 
+        //to make this test independent from the above test
         const response1 = await (0, supertest_1.default)(server_1.default).post("/users/signup").send(newUser);
         const userLoginData = {
             userId: response1.body.id,

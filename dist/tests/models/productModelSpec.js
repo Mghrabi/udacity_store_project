@@ -8,7 +8,7 @@ describe("Suite for product model:", () => {
     const newProduct = {
         name: "ball",
         price: 100,
-        category: 'play'
+        category: "play",
     };
     const newUser = {
         firstname: "ahmed",
@@ -23,9 +23,9 @@ describe("Suite for product model:", () => {
         //index method
         const indexResult = await new productModel_1.ProductModel().index();
         //show method
-        const showResult = await new productModel_1.ProductModel().show((createResult.id).toString());
+        const showResult = await new productModel_1.ProductModel().show(createResult.id.toString());
         expect(createResult).toEqual(jasmine.objectContaining({ name, price, category }));
         expect(indexResult[0]).toEqual(jasmine.objectContaining({ name, price, category }));
-        expect((showResult)).toEqual(jasmine.objectContaining({ name, price, category }));
+        expect(showResult).toEqual(jasmine.objectContaining({ name, price, category }));
     });
 });
