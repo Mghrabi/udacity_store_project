@@ -25,5 +25,22 @@
 * 3- run [npm run test]
 * note: after running the test, test_DB will be dropped automatically. so you need to create the test_DB every time before running a test
 
+
+## ENV Variables (for reviewing purpose)
+
+# this file should be ignored, but included for reviewing purposes 
+* HOST=localhost
+* DB_USERNAME=YOUR_DB_NAME 
+* PASSWORD=YOUR_PASSWORD
+* DATABASE=udacity_store
+* DATABASE_TEST=udacity_store_test
+
+* SALT_ROUNDS=10
+* PEPPER=used_pepper
+
+* TOKEN_SECRET_KEY=this_is_token_secret_key
+* ENV=DEV
+
+
 ## Notes
 * After creating the databases for the first time by yourself, you can use [npm run create_DB] and [npm run create_DB_test] if they were dropped for any reason.
