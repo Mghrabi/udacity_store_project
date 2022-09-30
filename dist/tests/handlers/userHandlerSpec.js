@@ -5,7 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const supertest_1 = __importDefault(require("supertest"));
 const server_1 = __importDefault(require("../../server"));
-const authentication_1 = require("../../utilities/authentication");
 describe("Suite for users endpoints:", () => {
     // beforeAll(() => {
     //   client.connect();
@@ -19,6 +18,7 @@ describe("Suite for users endpoints:", () => {
         const response = await (0, supertest_1.default)(server_1.default).post("/users/signup").send(newUser);
         expect(response.status).toEqual(200);
         expect(response.body.id).toBeDefined();
+        expect(response.body.firstname).toEqual('ahmed');
     });
     it("User login: POST users/login", async () => {
         //to make this test independent from the above test
@@ -33,26 +33,29 @@ describe("Suite for users endpoints:", () => {
         // console.log(response.body)
         expect(response.status).toEqual(200);
         expect(response.body.accessToken).toBeDefined();
+        expect(response.body.id).toEqual(response1.body.id);
     });
     it("All users: GET users/index", async () => {
-        const userId = 1;
-        const token = (0, authentication_1.createToken)(userId);
+        const response1 = await (0, supertest_1.default)(server_1.default).post("/users/signup").send(newUser);
+        const { accessToken, id } = response1.body;
         const response = await (0, supertest_1.default)(server_1.default)
             .get("/users/index")
-            .set("authorization", `Bearer ${token}`);
+            .set("authorization", `Bearer ${accessToken}`);
         // console.log(response.body)
         expect(response.status).toEqual(200);
-        expect(response.body).toBeDefined();
+        expect(response.body[0]).toBeDefined();
+        expect(response.body[0].id).toBeDefined();
     });
     it("get one user: GET users/show/:userId", async () => {
         const response1 = await (0, supertest_1.default)(server_1.default).post("/users/signup").send(newUser);
-        const userId = response1.body.id;
-        const token = (0, authentication_1.createToken)(userId);
+        const { accessToken, id } = response1.body;
         const response = await (0, supertest_1.default)(server_1.default)
-            .get(`/users/show/${response1.body.id}`)
-            .set("authorization", `Bearer ${token}`);
+            .get(`/users/show/${id}`)
+            .set("authorization", `Bearer ${accessToken}`);
         // console.log(response.body)
         expect(response.status).toEqual(200);
         expect(response.body).toBeDefined();
+        expect(response.body.id).toEqual(id);
+        expect(response.body.firstname).toEqual('ahmed');
     });
 });

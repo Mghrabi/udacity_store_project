@@ -1,8 +1,8 @@
 # Udacity_store_project
 
 ## Connections
-* server port: 3000
-* database port: 5432 
+* Server port: 3000
+* Database port: 5432 
 
 ## Development setup
 * 1- run [npm install] for packages installation
@@ -26,4 +26,4 @@
 * note: after running the test, test_DB will be dropped automatically. so you need to create the test_DB every time before running a test
 
 ## Notes
-* after creating the databases for the first time by yourself, you can use [npm run create_DB] and [npm run create_DB_test] if they were dropped for any reason.
+* After creating the databases for the first time by yourself, you can use [npm run create_DB] and [npm run create_DB_test] if they were dropped for any reason.

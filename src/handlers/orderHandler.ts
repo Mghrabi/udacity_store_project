@@ -19,7 +19,7 @@ const createOrderHandler = async (
     //give a token
     return res.send({ ...order });
   } catch (err: unknown) {
-    return res.send(`err in creating order , ${err} `);
+    return res.status(400).send(`err in creating order , ${err} `);
   }
 };
 
@@ -33,7 +33,7 @@ const getAllOrdersByUserIdHandler = async (
     const orders = await Order.getOrdersByUserId(res.locals.userIdInToken);
     return res.send(orders);
   } catch (err: unknown) {
-    return res.send(
+    return res.status(400).send(
       `err in getting all Orders with userId ${res.locals.userIdInToken}, err: ${err} `
     );
   }
@@ -49,7 +49,7 @@ const getCompletedOrdersByUserIdHandler = async (
     );
     return res.send(orders);
   } catch (err: unknown) {
-    return res.send(
+    return res.status(400).send(
       `err in get completed orders by userId ${res.locals.userIdInToken}, err: ${err} `
     );
   }
@@ -69,13 +69,13 @@ const addProductToOrder = async (
 
     //add product to order
     if (!order) {
-      return res.send(
+      return res.status(400).send(
         `this order doesn't exist or user with id ${res.locals.userIdInToken} doesn't own this order`
       );
     }
     //the order should be active to add more products to it (this how I think about it)
     else if ((order as Order).status === "complete") {
-      return res.send("order is already completed");
+      return res.status(400).send("order is already completed");
     }
 
     //logic for adding product to order
@@ -88,7 +88,7 @@ const addProductToOrder = async (
     });
     return res.send(result);
   } catch (err: unknown) {
-    return res.send(`err in adding product to order, err: ${err} `);
+    return res.status(400).send(`err in adding product to order, err: ${err} `);
   }
 };
 
@@ -104,7 +104,7 @@ const setOrderStatusByUserIdHandler = async (
       req.body.orderId
     );
     if (!orderCheck) {
-      return res.send(
+      return res.status(400).send(
         `this order doesn't exist or user with id ${res.locals.userIdInToken} doesn't own this order`
       );
     }
@@ -117,7 +117,7 @@ const setOrderStatusByUserIdHandler = async (
     );
     return res.send("done");
   } catch (err: unknown) {
-    return res.send(
+    return res.status(400).send(
       `err in setting the status of the order with userId ${res.locals.userIdInToken}, err: ${err} `
     );
   }

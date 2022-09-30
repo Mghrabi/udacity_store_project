@@ -30,7 +30,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 - Show [GET] '/users/show/:userId', [token required] => note: userId should be the same used to create the token to make sure you are the owner or error will be returned
 
--[EXTRA] [delete] '/users/delete/:userId' [token required] => userId should be the same of one provided in the token 
+-[EXTRA] [delete] '/users/:userId' [token required] => userId should be the same of one provided in the token 
 
 
 

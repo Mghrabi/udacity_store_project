@@ -1,4 +1,3 @@
-import client from "../../db/db";
 import request from "supertest";
 import app from "../../server";
 import { createToken } from "../../utilities/authentication";
@@ -17,6 +16,7 @@ describe("Suite for users endpoints:", (): void => {
     const response = await request(app).post("/users/signup").send(newUser);
     expect(response.status).toEqual(200);
     expect(response.body.id).toBeDefined();
+    expect(response.body.firstname).toEqual('ahmed');
   });
 
   it("User login: POST users/login", async (): Promise<void> => {
@@ -32,28 +32,31 @@ describe("Suite for users endpoints:", (): void => {
     // console.log(response.body)
     expect(response.status).toEqual(200);
     expect(response.body.accessToken).toBeDefined();
+    expect(response.body.id).toEqual(response1.body.id);
   });
 
   it("All users: GET users/index", async (): Promise<void> => {
-    const userId = 1;
-    const token = createToken(userId);
+    const response1 = await request(app).post("/users/signup").send(newUser);
+    const {  accessToken, id } = response1.body
     const response = await request(app)
       .get("/users/index")
-      .set("authorization", `Bearer ${token}`);
+      .set("authorization", `Bearer ${accessToken}`);
     // console.log(response.body)
     expect(response.status).toEqual(200);
-    expect(response.body).toBeDefined();
+    expect(response.body[0]).toBeDefined();
+    expect(response.body[0].id).toBeDefined();
   });
 
   it("get one user: GET users/show/:userId", async (): Promise<void> => {
     const response1 = await request(app).post("/users/signup").send(newUser);
-    const userId = response1.body.id;
-    const token = createToken(userId);
+    const { accessToken, id} = response1.body
     const response = await request(app)
-      .get(`/users/show/${response1.body.id}`)
-      .set("authorization", `Bearer ${token}`);
+      .get(`/users/show/${id}`)
+      .set("authorization", `Bearer ${accessToken}`);
     // console.log(response.body)
     expect(response.status).toEqual(200);
     expect(response.body).toBeDefined();
+    expect(response.body.id).toEqual(id);
+    expect(response.body.firstname).toEqual('ahmed');
   });
 });

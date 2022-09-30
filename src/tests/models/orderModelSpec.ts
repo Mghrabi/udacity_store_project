@@ -28,17 +28,12 @@ describe("Suite for order model:", (): void => {
     };
     //test for create method
     const createResult = await new OrderModel().create(order as Order);
-    // console.log(createResult);
-    //index method
     const indexResult = await new OrderModel().getOrdersByUserId(
       (userCreated as User).id!.toString()
     );
-    // console.log("indexResult", indexResult);
-    //completed orders by userId
     const completedOrders = await new OrderModel().getCompletedOrdersByUserId(
       (userCreated as User).id as number
     );
-    // console.log("completedOrders", completedOrders);
     expect((createResult as Order).userid).toEqual((userCreated as User).id);
     expect((indexResult as Order[])[0].userid).toEqual(
       (userCreated as User).id
