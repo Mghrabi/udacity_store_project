@@ -1,7 +1,11 @@
 # Udacity_store_project
 
+## Connections
+* server port: 3000
+* database port: 5432 
+
 ## Development setup
-* 1- run -npm install- for packages installation
+* 1- run [npm install] for packages installation
 * 2- small note: you don't have to create any databases yourself, the scripts in package.json will create them for you, just follow the instructions 
 * 2- change environmental variables in .env file (note: it's better to not change DATABASE and DATABASE_TEST variables but if you want to, then you have to do this additional step: 3)
 * 3- go to package.json, update the following scripts:
